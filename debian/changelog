@@ -1,0 +1,61 @@
+libxs-parse-sublike-perl (0.14-1) unstable; urgency=medium
+
+  * Import upstream version 0.14.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 31 Oct 2021 14:59:07 +0100
+
+libxs-parse-sublike-perl (0.13-1) unstable; urgency=medium
+
+  * Import upstream version 0.13.
+  * Add API changes to NEWS.Developer.
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 01 Sep 2021 19:18:14 +0200
+
+libxs-parse-sublike-perl (0.12-1) unstable; urgency=medium
+
+  * Import upstream version 0.12.
+  * Declare compliance with Debian Policy 4.6.0.
+  * Update Build-Depends for cross builds.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 28 Aug 2021 18:02:54 +0200
+
+libxs-parse-sublike-perl (0.11-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+
+  [ gregor herrmann ]
+  * Import upstream version 0.11.
+  * Update years of upstream and packaging copyright.
+  * Declare compliance with Debian Policy 4.5.1.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 23 Jan 2021 21:22:37 +0100
+
+libxs-parse-sublike-perl (0.10-1) unstable; urgency=medium
+
+  * Import upstream version 0.10.
+  * Add note about new ABI version to NEWS.Developer.
+  * Drop debian/tests/pkg-perl/use-whitelist. The warnings are gone.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 20 Jun 2020 22:38:18 +0200
+
+libxs-parse-sublike-perl (0.09-1) unstable; urgency=medium
+
+  * Update 'DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow' to '=+all'.
+  * Import upstream version 0.09.
+  * Bump debhelper-compat to 13.
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 15 Jun 2020 18:23:03 +0200
+
+libxs-parse-sublike-perl (0.07-1) unstable; urgency=medium
+
+  * Import upstream version 0.07.
+  * New build dependency: libtest-fatal-perl.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 05 Apr 2020 15:34:53 +0200
+
+libxs-parse-sublike-perl (0.06-1) unstable; urgency=low
+
+  * Initial release (closes: #955249).
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 28 Mar 2020 18:49:44 +0100

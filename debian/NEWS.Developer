@@ -1,0 +1,20 @@
+libxs-parse-sublike-perl (0.13-1) unstable; urgency=medium
+
+  From upstream Changes for 0.13:
+
+  [CHANGES]
+   * New ABI version 4
+      + Set up functions in PL_modglobal instead of perl-visible global
+        symbol table
+      + Add a `permit_hintkey` convenient shortcut
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 01 Sep 2021 19:16:26 +0200
+
+libxs-parse-sublike-perl (0.10-1) unstable; urgency=medium
+
+  From upstream Changes for 0.10:
+
+  [BREAKING CHANGES]
+   * New ABI version 3
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 20 Jun 2020 22:29:56 +0200

@@ -1,0 +1,93 @@
+Revision history for XS-Parse-Sublike
+
+0.14    2021-10-28
+        [CHANGES]
+         * Added XS_PARSE_SUBLIKE_FLAG_PREFIX; discourage the _any() function
+           to achieve similar effect
+         * Added XS_PARSE_SUBLIKE_FLAG_BODY_OPTIONAL to permit bodyless sublike
+           declarations
+         * Better compiletime warnings when a sub declaration lacks a
+           body-delimiting brace
+
+        [BUGFIXES]
+         * Fix for Perl < 5.20 on Win32 (thanks ilmari) (RT139296)
+         * Handle the new OP_ARGCHECK aux structure of perl 5.31.5 (thanks
+           ilmari) (RT139295)
+         * Accomodate newly-added core sv_setrv_*() functions
+
+0.13    2021-08-30
+        [CHANGES]
+         * New ABI version 4
+            + Set up functions in PL_modglobal instead of perl-visible global
+              symbol table
+            + Add a `permit_hintkey` convenient shortcut
+         * Better code structure of XS::Parse::Sublike::Builder
+
+0.12    2021-06-21
+        [BUGFIXES]
+         * Try to work around parse_block()'s unbalanced scopestack messups
+         * Namespace the static variables in the .h file appropriately in case
+           both this as XSParseKeyword are loaded
+
+0.11    2021-01-18
+        [BUGFIXES]
+         * Don't SEGV on signature parse error (RT133865)
+         * Account for change of signature validation error message in latest
+           bleadperl (RT134012)
+
+0.10    2020-06-20
+        [BREAKING CHANGES]
+         * New ABI version 3
+
+        [CHANGES]
+         * Pass an additional 'hookdata' parameter around between caller and
+           hook stage functions
+
+0.09    2020-06-15
+        [CHANGES]
+         * Define API for an optional stage for filtering and applying
+           attributes during parsing
+
+0.08    2020-06-12
+        [CHANGES]
+         * Define API to either require or skip parsing the name of a sub, or
+           skip parsing attributes or signatures           
+
+0.07    2020-04-02
+        [BUGFIXES]
+         * Ensure that empty-signature functions are still parsed correctly
+           and include arg count check (RT132284)
+
+0.06    2020-03-27
+        [CHANGES]
+         * Pass a standard shared context struct through the various hook
+           stages
+         * Add an early hook stage before the call to start_subparse()
+
+0.05    2020-03-26
+        [BUGFIXES]
+         * Fix hax/parse_subsignature.c.inc to cope with whitespace between
+           parameter declarations
+
+0.04    2020-03-18
+        [CHANGES]
+         * Pass a required module version number to boot_xs_parse_sublike()
+         * Added lots of unit tests
+
+0.03    2020-03-18
+        [CHANGES]
+         * Added xs_parse_sublike_any() allowing custom keywords to combine
+           with registered hooks
+
+        [BUGFIXES]
+         * Avoid double-free of sigops in case of parse failure
+         * Fix hax/parse_subsignature.c.inc for named parameters with default
+           expressions
+
+0.02    2020-03-17
+        [CHANGES]
+         * Added `register_xs_parse_sublike()` and the `permit` hook stage
+         * Added toplevel PL_keyword_hook parser function
+
+0.01    2020-03-15
+        First version, released on an unsuspecting world.
