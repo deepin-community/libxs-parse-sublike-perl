@@ -1,0 +1,28 @@
+Description: Fix string formatting argument type warning on 32-bit
+ A simple cast seems like the most straightforward way to solve this, as
+ it's extremely unlikely that the size will get near 2^31.
+Origin: Ubuntu
+Bug: https://rt.cpan.org/Public/Bug/Display.html?id=150266
+Bug-Debian: https://bugs.debian.org/1056397
+Forwarded: via irc
+Author: Gianfranco Costamagna <locutusofborg@debian.org>
+Reviewed-by: gregor herrmann <gregoa@debian.org>
+Last-Update: 2024-08-17
+
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/lib/XS/Parse/Sublike.xs
++++ b/lib/XS/Parse/Sublike.xs
+@@ -559,10 +559,10 @@
+ {
+   if(funcs->ver < 5)
+     croak("Mismatch in signature param attribute ABI version field: module wants %u; we require >= 5\n",
+-      funcs->ver);
++      (int)funcs->ver);
+   if(funcs->ver > XSPARSESUBLIKE_ABI_VERSION)
+     croak("Mismatch in signature param attribute ABI version field: module wants %u; we support <= %d\n",
+-      funcs->ver, XSPARSESUBLIKE_ABI_VERSION);
++      (int)funcs->ver, XSPARSESUBLIKE_ABI_VERSION);
+ 
+   if(!name || !(name[0] >= 'A' && name[0] <= 'Z'))
+     croak("Signature param attribute names must begin with a capital letter");

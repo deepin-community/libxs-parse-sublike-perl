@@ -3,10 +3,12 @@
 use v5.14;
 use warnings;
 
-use Test::More;
+use Test2::V0;
 
 use lib "t";
 use testcase "t::func";
+
+BEGIN { $^H{"t::func/func"}++ }
 
 # named func
 {
@@ -30,7 +32,7 @@ use testcase "t::func";
    {
       my ( $pkg, $sub, $attr ) = @_;
       $modify_invoked++;
-      Test::More::is( $attr, "MyCustomAttribute(value here)",
+      ::is( $attr, "MyCustomAttribute(value here)",
          'MODIFY_CODE_ATTRIBUTES takes attribute' );
 
       return ();

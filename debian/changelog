@@ -1,3 +1,71 @@
+libxs-parse-sublike-perl (0.23-1) unstable; urgency=medium
+
+  * Import upstream version 0.23.
+  * Refresh 32-bit-strlen-warning.patch (offset).
+  * Mention new ABI version in debian/NEWS.Developer.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 17 Aug 2024 17:31:14 +0200
+
+libxs-parse-sublike-perl (0.22-1) unstable; urgency=medium
+
+  * Import upstream version 0.22.
+  * Update years of upstream and packaging copyright.
+  * Add test and runtime dependency on libfile-sharedir-perl.
+  * Update autopkgtest helpers to changed build system.
+  * Declare compliance with Debian Policy 4.7.0.
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 24 Jul 2024 16:33:02 +0200
+
+libxs-parse-sublike-perl (0.21-2) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Fix string formatting argument type warning.
+
+    Closes: #1056397
+    Thanks to Adrian Bunk for the pointer to the Ubuntu patch.
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 22 Nov 2023 19:00:20 +0100
+
+libxs-parse-sublike-perl (0.21-1) unstable; urgency=medium
+
+  * Import upstream version 0.21.
+
+ -- gregor herrmann <gregoa@debian.org>  Thu, 26 Oct 2023 17:28:11 +0200
+
+libxs-parse-sublike-perl (0.20-1) unstable; urgency=medium
+
+  * Import upstream version 0.20.
+  * Add new src/ and include/ directories to autopkgtest setup.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 24 Sep 2023 00:45:09 +0200
+
+libxs-parse-sublike-perl (0.18-1) unstable; urgency=medium
+
+  * Import upstream version 0.18.
+  * Update test dependencies.
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 21 Jun 2023 21:23:23 +0200
+
+libxs-parse-sublike-perl (0.17-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Update standards version to 4.6.2, no changes needed.
+
+  [ gregor herrmann ]
+  * Import upstream version 0.17.
+  * Update years of upstream and packaging copyright.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 11 Jun 2023 02:25:50 +0200
+
+libxs-parse-sublike-perl (0.16-1) unstable; urgency=medium
+
+  * Team upload.
+
+    [ upstream ]
+  * new release(s)
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 16 Dec 2021 19:49:42 +0100
+
 libxs-parse-sublike-perl (0.14-1) unstable; urgency=medium
 
   * Import upstream version 0.14.

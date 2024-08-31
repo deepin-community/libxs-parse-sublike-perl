@@ -3,7 +3,7 @@
 use v5.14;
 use warnings;
 
-use Test::More;
+use Test2::V0;
 BEGIN {
    $] >= 5.026000 or plan skip_all => "No parse_subsignature()";
 }
@@ -13,6 +13,8 @@ no warnings 'experimental';
 
 use lib "t";
 use testcase "t::func";
+
+BEGIN { $^H{"t::func/func"}++ }
 
 use B::Deparse;
 
