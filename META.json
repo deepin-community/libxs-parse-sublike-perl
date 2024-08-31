@@ -4,7 +4,7 @@
       "Paul Evans <leonerd@leonerd.org.uk>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4231",
+   "generated_by" : "Module::Build version 0.4234",
    "license" : [
       "perl_5"
    ],
@@ -26,24 +26,29 @@
       },
       "runtime" : {
          "requires" : {
+            "File::ShareDir" : "1.00",
             "perl" : "5.016"
          }
       },
       "test" : {
          "requires" : {
-            "Test::Fatal" : "0",
-            "Test::More" : "0.88"
+            "Sub::Util" : "0",
+            "Test2::V0" : "0"
          }
       }
    },
    "provides" : {
+      "Sublike::Extended" : {
+         "file" : "lib/Sublike/Extended.pm",
+         "version" : "0.23"
+      },
       "XS::Parse::Sublike" : {
          "file" : "lib/XS/Parse/Sublike.pm",
-         "version" : "0.14"
+         "version" : "0.23"
       },
       "XS::Parse::Sublike::Builder" : {
          "file" : "lib/XS/Parse/Sublike/Builder.pm",
-         "version" : "0.14"
+         "version" : "0.23"
       }
    },
    "release_status" : "stable",
@@ -52,6 +57,6 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.14",
-   "x_serialization_backend" : "JSON::PP version 4.05"
+   "version" : "0.23",
+   "x_serialization_backend" : "JSON::PP version 4.16"
 }

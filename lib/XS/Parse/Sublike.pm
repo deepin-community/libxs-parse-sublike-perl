@@ -3,7 +3,7 @@
 #
 #  (C) Paul Evans, 2020-2021 -- leonerd@leonerd.org.uk
 
-package XS::Parse::Sublike 0.14;
+package XS::Parse::Sublike 0.23;
 
 use v5.14;
 use warnings;
@@ -31,6 +31,8 @@ and subject to change. Later versions may break ABI compatibility, requiring
 changes or at least a rebuild of any module that depends on it.
 
 =head1 XS FUNCTIONS
+
+=for highlighter language=c
 
 =head2 boot_xs_parse_sublike
 
@@ -116,7 +118,65 @@ various fields of the C<XSParseSublikeContext> structure.
       OP *attrs;
       OP *body;
       CV *cv;
+      U32 actions;
+      HV *moddata;
    }
+
+The C<actions> field will contain a bitmask of action flags that control the
+various steps that C<XS::Parse::Sublike> might take inbetween invoking hook
+stages. The initial value of this field is set after the name-parsing stage,
+depending on whether or not a name is found. Stage hook functions may modify
+the field to adjust the subsequent behaviour.
+
+At the current ABI version, a module will have to set the
+C<XS_PARSE_SUBLIKE_COMPAT_FLAG_DYNAMIC_ACTIONS> bit of the C<flags> field in
+order to make use of the I<actions> field. A future ABI version may remove
+this restriction.
+
+=over 4
+
+=item XS_PARSE_SUBLIKE_ACTION_CVf_ANON
+
+If set, the C<start_subparse()> call will be set up for an anonymous function
+protosub; if not it will be set for a named function. This is set by default
+if a name was not found.
+
+=item XS_PARSE_SUBLIKE_ACTION_SET_CVNAME
+
+If set, the newly-constructed CV will have the given name set on it. This is
+set by default if a name was found.
+
+On Perl versions 5.22 and above, this flag can be set even if
+C<XS_PARSE_SUBLIKE_ACTION_INSTALL_SYMBOL> is not. In this case, the CV will
+not be reachable via the symbol table, even though it knows its own name and
+pretends that it is. On earlier versions of perl this flag will be ignored in
+that case.
+
+=item XS_PARSE_SUBLIKE_ACTION_INSTALL_SYMBOL
+
+If set, the newly-constructed CV will be installed into the symbol table at
+its given name. Note that it is not possible to enable this flag without also
+enabling C<XS_PARSE_SUBLIKE_ACTION_SET_CVNAME>. This is set by default if a
+name was found.
+
+=item XS_PARSE_SUBLIKE_ACTION_REFGEN_ANONCODE
+
+If set, the syntax will yield the C<OP_REFGEN> / C<OP_ANONCODE> optree
+fragment typical of anonymous code expressions; if not it will be C<OP_NULL>.
+This is set by default if a name was not found.
+
+=item XS_PARSE_SUBLIKE_ACTION_RET_EXPR
+
+If set, the syntax will parse like an expression; if not it will parse like a
+statement. This is set by default if a name was not found.
+
+=back
+
+The I<moddata> field will point towards an HV that modules can used to store
+extra data between stages. As a naming convention a module should prefix its
+keys with its own module name and a slash character, C<"Some::Module/field">.
+The field will point to a newly-created HV for every parse invocation, and
+will be released when each parse is complete.
 
 =head1 PARSE HOOKS
 
@@ -127,10 +187,6 @@ The structure has a I<flags> field, which controls various optional parts of
 operation. The following flags are defined.
 
 =over 4
-
-=item XS_PARSE_SUBLIKE_FLAG_FILTERATTRS
-
-If set, the optional C<filter_attr> stage will be invoked.
 
 =item XS_PARSE_SUBLIKE_FLAG_BODY_OPTIONAL
 
@@ -184,10 +240,16 @@ definition.
 
 The parameter signature of the function.
 
-This part can be skipped, but the bit is ignored when in I<require_parts>. It
-is always permitted not to provide a signature for a function definition,
-because such syntax only applies when C<use feature 'signatures'> is in
-effect, and only on supporting perl versions.
+This part can be skipped, but it is always permitted not to provide a
+signature for a function definition even if the bit it set in
+I<require_parts>. This is because such syntax only applies when
+C<use feature 'signatures'> is in effect, and only on supporting perl
+versions.
+
+However, setting the bit in I<require_parts> instead has the effect of
+enabling C<use feature 'signatures'> (at least on supporting perl versions),
+thus permitting the syntax to use a signature even if the signatures feature
+was not previously enabled.
 
 =item XS_PARSE_SUBLIKE_PART_BODY
 
@@ -245,16 +307,16 @@ Invoked just before C<start_subparse()> is called.
 At this point the optional sub attributes are parsed and filled into the
 C<attrs> field of the context, then C<block_start()> is called.
 
-=head2 The optional C<filter_attr> Stage
+=head2 The C<filter_attr> Stage
 
    bool (*filter_attr)(pTHX_ struct XSParseSublikeContext *ctx,
       SV *attr, SV *val, void *hookdata);
 
-If the I<flags> field includes C<XS_PARSE_SUBLIKE_FLAG_FILTERATTRS> then each
-individual attribute is passed through this optional filter function
-immediately as each is parsed. I<attr> will be a string SV containing the name
-of the attribute, and I<val> will either be C<NULL>, or a string SV containing
-the contents of the parens after its name (without the parens themselves).
+If this optional stage is defined, then each individual attribute is passed
+through this optional filter function immediately as each is parsed. I<attr>
+will be a string SV containing the name of the attribute, and I<val> will
+either be C<NULL>, or a string SV containing the contents of the parens after
+its name (without the parens themselves).
 
 If the filter returns C<true>, it indicates that it has in some way handled
 the attribute and it should not be added to the list given to C<newATTRSUB()>.

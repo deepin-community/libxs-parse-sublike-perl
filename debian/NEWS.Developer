@@ -1,3 +1,13 @@
+libxs-parse-sublike-perl (0.23-1) unstable; urgency=medium
+
+  From upstream Changes for 0.23:
+
+  [CHANGES]
+  * New ABI version 6
+     + Adds a `ver` field to the `XSParseSublikeHooks` structure
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 17 Aug 2024 17:29:54 +0200
+
 libxs-parse-sublike-perl (0.13-1) unstable; urgency=medium
 
   From upstream Changes for 0.13:

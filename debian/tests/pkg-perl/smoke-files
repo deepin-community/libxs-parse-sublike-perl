@@ -1,6 +1,8 @@
 Build.PL
-XSParseSublike.h
 hax/
 inc/
+include/
 lib/
+share/
+src/
 t/

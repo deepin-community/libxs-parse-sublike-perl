@@ -3,10 +3,15 @@
 use v5.14;
 use warnings;
 
-use Test::More;
+use Test2::V0;
 
 use lib "t";
 use testcase "t::prefix";
+
+BEGIN {
+   $^H{"t::prefix/func"}++;
+   $^H{"t::prefix/prefixed"}++;
+}
 
 our $LOG; BEGIN { $LOG = "" };
 
