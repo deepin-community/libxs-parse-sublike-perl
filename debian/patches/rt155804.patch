@@ -1,0 +1,23 @@
+Description: Fix compiler warnings on 32bit architectures.
+Origin: CPAN RT
+Bug: <URL: https://rt.cpan.org/Ticket/Display.html?id=155804
+Bug-Debian: https://bugs.debian.org/1082893
+Author: Paul Evans <leonerd@leonerd.org.uk>
+Reviewed-by: gregor herrmann <gregoa@debian.org>
+Last-Update: 2024-09-29
+
+--- a/t/func.xs
++++ b/t/func.xs
+@@ -58,9 +58,9 @@
+    */
+ 
+   HV *n = newHV();
+-  hv_stores(n, "op",    newSVuv((UV)ctx->op));
+-  hv_stores(n, "varop", newSVuv((UV)ctx->varop));
+-  hv_stores(n, "defop", newSVuv((UV)ctx->defop));
++  hv_stores(n, "op",    newSVuv(PTR2UV(ctx->op)));
++  hv_stores(n, "varop", newSVuv(PTR2UV(ctx->varop)));
++  hv_stores(n, "defop", newSVuv(PTR2UV(ctx->defop)));
+ 
+   AV *av = get_av("main::ATTRIBUTE_SAW_OPTREES", GV_ADD);
+ 

@@ -7,13 +7,13 @@ Bug-Debian: https://bugs.debian.org/1056397
 Forwarded: via irc
 Author: Gianfranco Costamagna <locutusofborg@debian.org>
 Reviewed-by: gregor herrmann <gregoa@debian.org>
-Last-Update: 2024-08-17
+Last-Update: 2024-09-20
 
 ---
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- a/lib/XS/Parse/Sublike.xs
 +++ b/lib/XS/Parse/Sublike.xs
-@@ -559,10 +559,10 @@
+@@ -599,10 +599,10 @@
  {
    if(funcs->ver < 5)
      croak("Mismatch in signature param attribute ABI version field: module wants %u; we require >= 5\n",
