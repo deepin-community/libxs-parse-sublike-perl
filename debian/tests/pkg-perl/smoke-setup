@@ -5,7 +5,8 @@ cd $TDIR
 # we need to compile stuff in t/
 perl Build.PL
 ./Build
-./Build test
+# redirect STDERR to STDOUT, autopkgtest fails otherwise
+./Build test 2>&1
 
 # and now remove everything except t/
 # before `smoke' is run

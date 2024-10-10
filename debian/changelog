@@ -1,3 +1,33 @@
+libxs-parse-sublike-perl (0.27-3) unstable; urgency=medium
+
+  * Add patch from upstream to fix compiler warnings in test code on 32bit
+    architectures.
+    Cf. #1082893.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 29 Sep 2024 00:57:07 +0200
+
+libxs-parse-sublike-perl (0.27-2) unstable; urgency=medium
+
+  * debian/tests/pkg-perl/smoke-setup: redirect STDERR to STDOUT,
+    autopkgtest fails otherwise.
+    The compiler warnings on 32bit architectures only affect test binaries.
+    (Closes: #1082893)
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 28 Sep 2024 15:16:33 +0200
+
+libxs-parse-sublike-perl (0.27-1) unstable; urgency=medium
+
+  * Import upstream version 0.27.
+
+ -- gregor herrmann <gregoa@debian.org>  Wed, 25 Sep 2024 21:49:16 +0200
+
+libxs-parse-sublike-perl (0.26-1) unstable; urgency=medium
+
+  * Import upstream version 0.26.
+  * Refresh 32-bit-strlen-warning.patch (offset).
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 20 Sep 2024 23:45:52 +0200
+
 libxs-parse-sublike-perl (0.23-1) unstable; urgency=medium
 
   * Import upstream version 0.23.
