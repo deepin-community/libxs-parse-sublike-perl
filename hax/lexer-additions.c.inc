@@ -45,13 +45,18 @@ static SV *MY_lex_scan_ident(pTHX_ int flags)
 
   char *ident = PL_parser->bufptr;
 
+  /* Don't get confused by things that look like attrs */
+  if((flags & LEX_IDENT_PACKAGENAME) && (ident[0] == ':' && ident[1] != ':'))
+    return FALSE;
+
   while((c = lex_peek_unichar(0))) {
     if(at_start ? isIDFIRST_uni(c) : isALNUM_uni(c))
       at_start = FALSE;
     /* TODO: This sucks in the case of a false Foo:Bar match */
-    else if((flags & LEX_IDENT_PACKAGENAME) && (c == ':')) {
+    else if((flags & LEX_IDENT_PACKAGENAME) && (c == ':') && (PL_parser->bufptr[1] == ':')) {
       lex_read_unichar(0);
       if(lex_read_unichar(0) != ':')
+        /* Probably unreachable now due to condition above? */
         croak("Expected colon to be followed by another in package name");
     }
     else
