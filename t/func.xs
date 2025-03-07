@@ -17,6 +17,7 @@
 static const struct XSParseSublikeHooks parse_func_hooks = {
   .ver            = XSPARSESUBLIKE_ABI_VERSION,
   .permit_hintkey = "t::func/func",
+  .flags          = XS_PARSE_SUBLIKE_FLAG_ALLOW_PKGNAME,
 };
 
 static const struct XSParseSublikeHooks parse_nfunc_hooks = {
@@ -35,6 +36,11 @@ static const struct XSParseSublikeHooks parse_nafunc_hooks = {
   .ver            = XSPARSESUBLIKE_ABI_VERSION,
   .permit_hintkey = "t::func/nafunc",
   .flags = XS_PARSE_SUBLIKE_FLAG_SIGNATURE_NAMED_PARAMS|XS_PARSE_SUBLIKE_FLAG_SIGNATURE_PARAM_ATTRIBUTES,
+};
+
+static const struct XSParseSublikeHooks parse_nopkgfunc_hooks = {
+  .ver            = XSPARSESUBLIKE_ABI_VERSION,
+  .permit_hintkey = "t::func/func",
 };
 
 #ifdef HAVE_SUB_PARAM_ATTRIBUTES
@@ -58,9 +64,9 @@ static void post_defop_Attribute(pTHX_ struct XPSSignatureParamContext *ctx, voi
    */
 
   HV *n = newHV();
-  hv_stores(n, "op",    newSVuv((UV)ctx->op));
-  hv_stores(n, "varop", newSVuv((UV)ctx->varop));
-  hv_stores(n, "defop", newSVuv((UV)ctx->defop));
+  hv_stores(n, "op",    newSVuv(PTR2UV(ctx->op)));
+  hv_stores(n, "varop", newSVuv(PTR2UV(ctx->varop)));
+  hv_stores(n, "defop", newSVuv(PTR2UV(ctx->defop)));
 
   AV *av = get_av("main::ATTRIBUTE_SAW_OPTREES", GV_ADD);
 
@@ -95,6 +101,8 @@ BOOT:
   register_xs_parse_sublike("nfunc",  &parse_nfunc_hooks,  NULL);
   register_xs_parse_sublike("afunc",  &parse_afunc_hooks,  NULL);
   register_xs_parse_sublike("nafunc", &parse_nafunc_hooks, NULL);
+
+  register_xs_parse_sublike("nopkgfunc",   &parse_nopkgfunc_hooks,   NULL);
 #ifdef HAVE_SUB_PARAM_ATTRIBUTES
   register_xps_signature_attribute("Attribute", &attr_funcs, NULL);
 #endif

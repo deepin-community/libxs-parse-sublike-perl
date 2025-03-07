@@ -1,3 +1,50 @@
+libxs-parse-sublike-perl (0.37-1) unstable; urgency=medium
+
+  * Import upstream version 0.37.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 15 Feb 2025 21:52:03 +0100
+
+libxs-parse-sublike-perl (0.36-1) unstable; urgency=medium
+
+  * Import upstream version 0.36.
+  * Refresh 32-bit-strlen-warning.patch (offset).
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 26 Jan 2025 02:02:32 +0100
+
+libxs-parse-sublike-perl (0.35-1) unstable; urgency=medium
+
+  * Import upstream version 0.35.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 11 Jan 2025 01:42:36 +0100
+
+libxs-parse-sublike-perl (0.33-1) unstable; urgency=medium
+
+  * Import upstream version 0.33.
+  * Update years of upstream and packaging copyright.
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 06 Jan 2025 03:29:47 +0100
+
+libxs-parse-sublike-perl (0.32-1) unstable; urgency=medium
+
+  * Import upstream version 0.32.
+  * Refresh 32-bit-strlen-warning.patch (offset).
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 21 Dec 2024 20:24:14 +0100
+
+libxs-parse-sublike-perl (0.30-1) unstable; urgency=medium
+
+  * Import upstream version 0.30.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 26 Oct 2024 16:54:53 +0200
+
+libxs-parse-sublike-perl (0.28-1) unstable; urgency=medium
+
+  * Import upstream version 0.28.
+  * Refresh 32-bit-strlen-warning.patch (offset).
+  * Drop rt155804.patch which was provided by upstream.
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 11 Oct 2024 18:04:20 +0200
+
 libxs-parse-sublike-perl (0.27-3) unstable; urgency=medium
 
   * Add patch from upstream to fix compiler warnings in test code on 32bit
